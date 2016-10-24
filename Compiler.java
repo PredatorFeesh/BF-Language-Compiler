@@ -2,9 +2,12 @@ import java.lang.Exception;
 import java.lang.StringBuilder;
 import java.lang.Character;
 import java.lang.String;
+import java.lang.System;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Compiler{
 	
@@ -45,7 +48,7 @@ public class Compiler{
 		String[] sep = c.split("");
 		int i  = 0;
 		for ( String a : sep )
-			if ( a.equals("<") || a.equals(">") || a.equals("+") || a.equals("-") || a.equals(".") || a.equals("[") || a.equals("]") ){
+			if ( a.equals("<") || a.equals(">") || a.equals("+") || a.equals("-") || a.equals(".") || a.equals("[") || a.equals("]") || a.equals(",") ){
 				Compiler.commands.add( a );
 				i++;			
 			}		
@@ -53,13 +56,17 @@ public class Compiler{
 		return true;
 	}
 	public boolean parseCommands(int s, int e){
+	try{		
 		String c = "";
 		int t = 0;
+		String in="";
+		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 		for ( int i = s; i <= e; i++ ) {
 			if(Compiler.commands.size() == i)
 				break;
 
 			c = Compiler.commands.get(i);
+
 			switch (c){
 				case ">":
 					Compiler.node++;
@@ -72,6 +79,14 @@ public class Compiler{
 				break;
 				case "-":
 					Compiler.nodes[Compiler.node]--;
+				break;
+				case ",":
+System.out.println("A Comma!");
+					in = sc.readLine();
+						if (in.length() > 1){
+							assert  false; 						
+						}
+					Compiler.nodes[Compiler.node] = (int)(in.charAt(0));	
 				break;
 				case ".":
 					System.out.println( Character.toString((char)Compiler.nodes[Compiler.node]));
@@ -98,6 +113,8 @@ public class Compiler{
 			}
 			
 		}
+	sc.close();
+	}catch(Exception err){ err.printStackTrace(); }
 	return true;
 	}
 	
