@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class Compiler{
 	
 	public static final ArrayList<String> commands = new ArrayList<String>();
-	public static final int[] nodes = new int[500];
-	public static int node = 250;
+	public static final int[] nodes = new int[1000];
+	public static int node = (int)(nodes.length / 2);
 
 	public static void main(String[] args){
 		if ( args.length != 0 )		
@@ -81,7 +81,7 @@ public class Compiler{
 					Compiler.nodes[Compiler.node]--;
 				break;
 				case ",":
-System.out.println("A Comma!");
+
 					in = sc.readLine();
 						if (in.length() > 1){
 							assert  false; 						
